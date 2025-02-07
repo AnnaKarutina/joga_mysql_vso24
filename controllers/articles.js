@@ -10,4 +10,17 @@ const getAllArticles = (req, res) => {
     })
 }
 
-module.exports = { getAllArticles }
+const getArticlesBySlug = (req, res) => {
+    const sql =`SELECT * FROM article WHERE slug="${req.params.slug}"`
+    db.query(sql, (error, result) => {
+        if(error) throw error;
+        res.render('article', {
+            article: result
+        })            
+    })
+}
+
+module.exports = { 
+    getAllArticles,
+    getArticlesBySlug
+}
